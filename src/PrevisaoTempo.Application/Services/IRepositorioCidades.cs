@@ -6,5 +6,6 @@ public interface IRepositorioCidades
 {
     public Task CriarCidadeAsync(Cidade cidade, CancellationToken cancellationToken = default);
     public Task AlterarCidadeAsync(Cidade cidade, CancellationToken cancellationToken = default);
+    public Task ExcluirCidadeAsync(int id, CancellationToken cancellationToken = default);
     public Task<bool> RetornaCidadePorCoordenada(decimal latitude, decimal longitude, CancellationToken cancellationToken);
 }
