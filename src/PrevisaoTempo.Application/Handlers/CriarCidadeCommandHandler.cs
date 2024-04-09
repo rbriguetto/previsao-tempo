@@ -18,7 +18,7 @@ public class CriarCidadeCommandHandler : IRequestHandler<CriarCidadeCommand, Cid
     {
         var novaCidade = new Cidade(request.Nome, request.Estado, request.Latitude, request.Longitude);
 
-        if (await _repositorioCidades.RetornaCidadePorCoordenada(request.Latitude, request.Longitude, cancellationToken) == Cidade.Empty) 
+        if (await _repositorioCidades.RetornaCidadePorCoordenada(request.Latitude, request.Longitude, cancellationToken) != Cidade.Empty) 
         {
             throw new PrevisaoTempoException("Latitude / longitude já cadastradas");
         }
