@@ -67,4 +67,14 @@ public class EfRepositorioCidades : IRepositorioCidades
 
         return cidadeRecord.ToDomain();
     }
+
+    public async Task<IList<Cidade>> RetornaCidadesAsync(CancellationToken cancellationToken)
+    {
+        return (await _dbContext
+            .Cidades
+            .AsNoTracking()
+            .ToListAsync(cancellationToken))
+            .Select(cidade => cidade.ToDomain())
+            .ToList();
+    }
 }

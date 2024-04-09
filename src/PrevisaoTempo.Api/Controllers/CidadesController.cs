@@ -36,4 +36,11 @@ public class CidadesController : ControllerBase
         var response = await _mediator.Send(new ExcluirCidadeCommand() { Id = id }, cancellationToken);
         return Ok(response);
     }
+
+    [HttpGet]
+    public async Task<ActionResult<IList<Cidade>>> ListaCidades(CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new RetornaCidadesQuery(), cancellationToken);
+        return Ok(response);
+    }
 }
