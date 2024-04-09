@@ -10,4 +10,6 @@ public static class EfRepositorioExtensions
         Longitude = cidade.Longitude 
     };
 
+    public static Cidade ToDomain(this CidadeRecord cidade) => new Cidade(cidade.Id, cidade.Nome, cidade.Estado, cidade.Latitude, cidade.Longitude);
+
 }

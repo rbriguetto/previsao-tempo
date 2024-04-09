@@ -55,9 +55,16 @@ public class EfRepositorioCidades : IRepositorioCidades
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<bool> RetornaCidadePorCoordenada(decimal latitude, decimal longitude, CancellationToken cancellationToken)
+    public async Task<Cidade> RetornaCidadePorCoordenada(decimal latitude, decimal longitude, CancellationToken cancellationToken)
     {
-        return !(await _dbContext.Cidades.Where(cidade => cidade.Latitude == latitude && cidade.Longitude == longitude)
-            .FirstOrDefaultAsync(cancellationToken) is null);
+        var cidadeRecord = await _dbContext.Cidades.Where(cidade => cidade.Latitude == latitude && cidade.Longitude == longitude)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (cidadeRecord is null)
+        {
+            return Cidade.Empty;
+        }
+
+        return cidadeRecord.ToDomain();
     }
 }

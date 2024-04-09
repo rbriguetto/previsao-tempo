@@ -2,6 +2,8 @@ namespace PrevisaoTempo.Domain;
 
 public record Cidade
 {
+    public static Cidade Empty = new Cidade(-1, string.Empty, string.Empty, -1, -1);
+
     public int Id { get; set; }
     public string Nome { get; set; }
     public string Estado { get; set; }
