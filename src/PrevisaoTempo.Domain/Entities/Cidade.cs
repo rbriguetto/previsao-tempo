@@ -21,7 +21,7 @@ public record Cidade
 
     public Cidade(string nome, string estado, decimal latitude, decimal longitude)
     {
-        Id = -1;
+        Id = 0;
         Nome = nome;
         Estado = estado;
         Latitude = latitude;
