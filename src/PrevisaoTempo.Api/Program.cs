@@ -1,6 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using PrevisaoTempo.Infraestructure;
-using PrevisaoTempo.Infraestructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,11 +18,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
-
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<PrevisaoTempoDbContext>();
-    dbContext.Database.Migrate();
-}
+app.UsePrevisaoTempoInfraestructure(app.Services);
 
 app.Run();

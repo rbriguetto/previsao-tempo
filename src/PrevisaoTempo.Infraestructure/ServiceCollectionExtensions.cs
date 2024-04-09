@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,5 +17,15 @@ public static class ServiceCollectionExtension
             options.UseSqlServer(configuration.GetConnectionString("PrevisaoTempo"));
         });
         return services;
+    }
+    
+    public static IApplicationBuilder UsePrevisaoTempoInfraestructure(this IApplicationBuilder app, IServiceProvider services)
+    {
+        using (var scope = services.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<PrevisaoTempoDbContext>();
+            dbContext.Database.Migrate();
+        }
+        return app;
     }
 }

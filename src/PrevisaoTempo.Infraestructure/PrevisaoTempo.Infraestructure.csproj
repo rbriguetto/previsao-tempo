@@ -13,5 +13,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4"/>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0"/>
   </ItemGroup>
 </Project>
