@@ -70,14 +70,14 @@ export class PrevisaoTempoService
         );
     }
 
-    public excluiCidade(id: string) : Observable<any> {
+    public excluiCidade(id: number) : Observable<any> {
         return this._state.pipe(
             take(1),
             tap(state => this._state.next({...state, isSaving: true})),
             switchMap(state => this._httpClient.delete(`${environment.apiUrl}/api/cidades/excluicidade?id=${id}`).pipe(
                 map(() => { 
                     this._state.next({...state, isSaving: false, 
-                            cidades: state.cidades.filter(n => n.id !== 0), error: ''});
+                            cidades: state.cidades.filter(n => n.id != id), error: ''});
                     return null;
                 }),
                 catchError(error => {
