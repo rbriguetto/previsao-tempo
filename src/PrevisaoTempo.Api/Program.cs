@@ -22,6 +22,8 @@ if (app.Environment.IsDevelopment())
         .AllowAnyOrigin());
 }
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
 app.MapControllers();
 app.UsePrevisaoTempoInfraestructure(app.Services);
 
