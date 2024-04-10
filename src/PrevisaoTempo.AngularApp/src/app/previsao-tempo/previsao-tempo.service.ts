@@ -62,7 +62,8 @@ export class PrevisaoTempoService
                     return cidade;
                 }),
                 catchError(error => {
-                    this._state.next({...state, isSaving: false, error: error.message});
+                    console.log(error);
+                    this._state.next({...state, isSaving: false, error: error.error});
                     return of(error);
                 })
             )),
