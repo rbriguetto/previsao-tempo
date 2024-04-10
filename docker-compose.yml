@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+
+  previsao-tempo-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    environment:
+      - ConnectionStrings__PrevisaoTempo=Server=sqlserver;Database=master;User Id=sa;Password=JAIODJH*W(dhjiasudh7u89qhwu8oHDwWG^!&wui;Encrypt=False
+
+    ports:
+      - 8080:8080
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=JAIODJH*W(dhjiasudh7u89qhwu8oHDwWG^!&wui
+    ports:
+      - '1433:1433'
