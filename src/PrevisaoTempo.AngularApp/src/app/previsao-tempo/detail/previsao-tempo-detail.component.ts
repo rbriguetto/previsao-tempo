@@ -20,7 +20,7 @@ export class PrevisaoTempoDetailComponent
         private _formBuilder: FormBuilder,
         private _previsaoTempoService: PrevisaoTempoService) {
         this.createForm(data);
-        this.dialogTitle = data.id === '' ? 'Nova Cidade' : `Alterando ${data.id}`;
+        this.dialogTitle = data.id === 0 ? 'Nova Cidade' : `Alterando ${data.id}`;
         this.isSaving$ = this._previsaoTempoService.state$.pipe(map(state => state.isSaving));
     }
 

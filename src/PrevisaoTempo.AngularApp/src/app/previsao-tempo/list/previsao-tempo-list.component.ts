@@ -30,7 +30,7 @@ export class PrevisaoTempoListComponent implements OnInit
     incluirCidade()
     {
         this.showDetail({
-                id: '',
+                id: 0,
                 nome: '',
                 estado: ''
             });

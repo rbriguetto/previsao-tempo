@@ -7,11 +7,13 @@ import { CommonModule } from "@angular/common";
 import { PrevisaoTempoDetailComponent } from "./detail/previsao-tempo-detail.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LoadingModule } from "../ui/loading/loading.module";
+import { WidgetPrevisaoComponent } from "./widget-previsao/widget-previsao.component";
 
 @NgModule({
     declarations: [
         PrevisaoTempoListComponent,
-        PrevisaoTempoDetailComponent
+        PrevisaoTempoDetailComponent,
+        WidgetPrevisaoComponent
     ],
     imports: [
         CommonModule,

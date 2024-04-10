@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, of, 
         switchMap, take, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Cidade, AppState as AppState } from './previsao-tempo.types';
+import { Cidade, AppState as AppState, Previsao } from './previsao-tempo.types';
 
 @Injectable({
     providedIn: 'root'
@@ -46,7 +46,7 @@ export class PrevisaoTempoService
     }
 
     public criaOuAtualiza(cidade: Cidade) : Observable<Cidade> {
-        const isCreating = cidade.id === '';
+        const isCreating = cidade.id === 0;
         const action = isCreating ? 'CriaCidade' : 'AlteraCidade';
         return this._state.pipe(
             take(1),
@@ -77,7 +77,7 @@ export class PrevisaoTempoService
             switchMap(state => this._httpClient.delete(`${environment.apiUrl}/api/cidades/excluicidade?id=${id}`).pipe(
                 map(() => { 
                     this._state.next({...state, isSaving: false, 
-                            cidades: state.cidades.filter(n => n.id !== id), error: ''});
+                            cidades: state.cidades.filter(n => n.id !== 0), error: ''});
                     return null;
                 }),
                 catchError(error => {
@@ -86,5 +86,11 @@ export class PrevisaoTempoService
                 })
             )),
         );
+    }
+
+    public consultaPrevisaoTempo(id: number): Observable<{previsaoTempo: Previsao}>
+    {
+        const endpoint = `${environment.apiUrl}/api/cidades/consultaprevisaotempo?id=${id}`;
+        return this._httpClient.get<{previsaoTempo: Previsao}>(endpoint)
     }
 }

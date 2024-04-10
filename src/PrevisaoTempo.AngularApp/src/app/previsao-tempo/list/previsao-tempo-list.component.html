@@ -32,6 +32,8 @@
                         <div class="flex flex-auto flex-col p-6 space-y-4">
                             <div class="text-2xl text-gray-600">{{ cidade.nome}}</div>
                             <pre style="text-wrap: pretty; font-family: Roboto, Helvetica Neue, sans-serif">UF: {{ cidade.estado }} | Latitude: {{ cidade.latitude }} | Longitude: {{ cidade.longitude }} </pre>
+
+                            <widget-previsao [cidade]="cidade"></widget-previsao>
                         </div>
                     </div>
                     <!-- /Cidade Card -->
