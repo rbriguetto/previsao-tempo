@@ -20,3 +20,9 @@ app.MapControllers();
 app.UsePrevisaoTempoInfraestructure(app.Services);
 
 app.Run();
+
+public partial class Program { 
+    protected Program() {
+
+    }
+}
