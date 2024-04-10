@@ -77,4 +77,9 @@ public class EfRepositorioCidades : IRepositorioCidades
             .Select(cidade => cidade.ToDomain())
             .ToList();
     }
+
+    public async Task<Cidade> RetornaCidadePorIdAsync(int id, CancellationToken cancellationToken = default)
+    {
+        return (await _dbContext.Cidades.FindAsync(id, cancellationToken))?.ToDomain() ?? Cidade.Empty;
+    }
 }

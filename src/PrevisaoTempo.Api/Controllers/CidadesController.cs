@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PrevisaoTempo.Application;
+using PrevisaoTempo.Application.Models;
 using PrevisaoTempo.Domain;
 
 namespace PrevisaoTempo.Api.Controllers;
@@ -41,6 +42,13 @@ public class CidadesController : ControllerBase
     public async Task<ActionResult<IList<Cidade>>> ListaCidades(CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(new RetornaCidadesQuery(), cancellationToken);
+        return Ok(response);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<CidadeComPrevisaoTempo>> ConsultaPrevisaoTempo(int id, CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new ConsultaPrevisaoTempoQuery() { IdCidade = id }, cancellationToken);
         return Ok(response);
     }
 }
