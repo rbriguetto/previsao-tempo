@@ -20,6 +20,7 @@ public static class ServiceCollectionExtension
         });
         services.Configure<OpenWeatherOptions>(configuration.GetSection(OpenWeatherOptions.Section));
         services.AddScoped<IServicoPrevisaoTempo, OpenWeatherApi>();
+        services.AddMemoryCache();
         return services;
     }
     
