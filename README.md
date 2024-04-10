@@ -20,3 +20,9 @@ Exemplo da Chave da API: `a691f923da4fb6dd8a642821b4ff2bd1`
 ## Diferenciais extras
 
 - Utilizar o CQRS como padrão organizacional com MediatR.
+
+
+## Como rodar
+
+- Utilize `docker-compose up` para rodar o sistema com todas as peças de infraestrutura.
+- Acesse o frontend pela porta `http://localhost:8080`.
