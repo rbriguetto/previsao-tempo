@@ -4,5 +4,5 @@ namespace PrevisaoTempo.Application.Services;
 
 public interface IServicoPrevisaoTempo
 {
-    Task<Previsao> RetornaPrevisaoTempo(Cidade cidade, CancellationToken cancellationToken = default);
+    Task<Previsao> RetornaPrevisaoTempoAsync(Cidade cidade, CancellationToken cancellationToken = default);
 }
