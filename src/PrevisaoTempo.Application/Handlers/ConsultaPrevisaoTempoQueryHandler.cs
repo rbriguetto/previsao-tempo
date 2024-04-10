@@ -28,7 +28,7 @@ public class ConsultaPrevisaoTempoQueryHandler : IRequestHandler<ConsultaPrevisa
 
         return new CidadeComPrevisaoTempo() { 
             Cidade = cidade,
-            PrevisaoTempo = await _servicoPrevisaoTempo.RetornaPrevisaoTempo(cidade)
+            PrevisaoTempo = await _servicoPrevisaoTempo.RetornaPrevisaoTempoAsync(cidade)
         };
     }
 }

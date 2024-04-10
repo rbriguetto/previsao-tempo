@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PrevisaoTempo.Application.Services;
 using PrevisaoTempo.Infraestructure.Data;
+using PrevisaoTempo.Infraestructure.OpenWeather;
 
 namespace PrevisaoTempo.Infraestructure;
 
@@ -16,6 +17,8 @@ public static class ServiceCollectionExtension
         services.AddDbContext<PrevisaoTempoDbContext>(options => {
             options.UseSqlServer(configuration.GetConnectionString("PrevisaoTempo"));
         });
+        services.Configure<OpenWeatherOptions>(configuration.GetSection(OpenWeatherOptions.Section));
+        services.AddScoped<IServicoPrevisaoTempo, OpenWeatherApi>();
         return services;
     }
     
