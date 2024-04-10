@@ -1,6 +1,8 @@
+using System.Net.Mime;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PrevisaoTempo.Application;
+using PrevisaoTempo.Application.Exceptions;
 using PrevisaoTempo.Application.Models;
 using PrevisaoTempo.Domain;
 
@@ -17,38 +19,117 @@ public class CidadesController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost]
+
+    [HttpPost()]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Cidade))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<Cidade>> CriaCidade([FromBody] CriarCidadeCommand model, CancellationToken cancellationToken)
     {
-        var response = await _mediator.Send(model, cancellationToken);
-        return Ok(response);
-    }
+        try
+        {
+            var response = await _mediator.Send(model, cancellationToken);
+            return Ok(response);
+        } 
+        catch (PrevisaoTempoException ex) 
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+ 
+   }
 
-    [HttpPost]
+    [HttpPost()]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Cidade))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<Cidade>> AlteraCidade([FromBody] AlterarCidadeCommand model, CancellationToken cancellationToken)
     {
-        var response = await _mediator.Send(model, cancellationToken);
-        return Ok(response);
+        try
+        {
+            var response = await _mediator.Send(model, cancellationToken);
+            return Ok(response);
+        } 
+        catch (PrevisaoTempoException ex) 
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
 
     [HttpDelete]
-    public async Task<ActionResult<Cidade>> ExcluiCidade(int id, CancellationToken cancellationToken)
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<bool>> ExcluiCidade(int id, CancellationToken cancellationToken)
     {
-        var response = await _mediator.Send(new ExcluirCidadeCommand() { Id = id }, cancellationToken);
-        return Ok(response);
+        try
+        {
+            var response = await _mediator.Send(new ExcluirCidadeCommand() { Id = id }, cancellationToken);
+            return Ok(response);
+        } 
+        catch (PrevisaoTempoException ex) 
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
 
     [HttpGet]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<Cidade>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<IList<Cidade>>> ListaCidades(CancellationToken cancellationToken)
     {
-        var response = await _mediator.Send(new RetornaCidadesQuery(), cancellationToken);
-        return Ok(response);
+        try
+        {
+            var response = await _mediator.Send(new RetornaCidadesQuery(), cancellationToken);
+            return Ok(response);
+        } 
+        catch (PrevisaoTempoException ex) 
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
 
     [HttpGet]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CidadeComPrevisaoTempo))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<CidadeComPrevisaoTempo>> ConsultaPrevisaoTempo(int id, CancellationToken cancellationToken)
     {
-        var response = await _mediator.Send(new ConsultaPrevisaoTempoQuery() { IdCidade = id }, cancellationToken);
-        return Ok(response);
-    }
+        try
+        {
+            var response = await _mediator.Send(new ConsultaPrevisaoTempoQuery() { IdCidade = id }, cancellationToken);
+            return Ok(response);
+        } 
+        catch (PrevisaoTempoException ex) 
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+   }
 }
